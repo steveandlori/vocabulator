@@ -1,0 +1,406 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">-->
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <!--<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            // TODO: revise progress bar w/ https://www.w3schools.com/howto/howto_js_progressbar.asp
+            // TODO: Store last date of review for all sets in the list and show the number of days elapsed since review
+            // TODO: add clear-all-selection-and-apply AND invert-selection-and-apply buttons
+            // TODO: randomize entire list and then just move an index to allow for forward / backward
+            // TODO: allow for marking words as needing more attention
+            // TODO: prioritize the least seen, least well-known words
+            // TODO: chunk the words into groups of five and run through a cycle of passive association, 
+            //          active association, sentence recognition, and multiple-choice sentence omission/completion
+        </script>
+        <script>
+            let vocab_221_257 = [
+                ["אָבַל", "To Mourn", "Gen 37:34<br>וַיִּקְרַ֤ע יַעֲקֹב֙ שִׂמְלֹתָ֔יו וַיָּ֥שֶׂם שַׂ֖ק בְּמָתְנָ֑יו וַיִּתְאַבֵּ֥ל עַל־בְּנ֖וֹ יָמִ֥ים רַבִּֽים׃"],
+                ["אָוָה", "To Desire, Want, Crave (Pi./Hitp.)", "1 Sam 2:16<br>וַיֹּ֨אמֶר אֵלָ֜יו הָאִ֗ישׁ קַטֵּ֨ר יַקְטִיר֤וּן כַּיּוֹם֙ הַחֵ֔לֶב וְקַ֨ח־לְךָ֔ כַּאֲשֶׁ֥ר תְּאַוֶּ֖ה נַפְשֶׁ֑ךָ"],
+                ["אוֹר", "To Be Bright, Shine", "Gen 1:15<br>וְהָי֤וּ לִמְאוֹרֹת֙ בִּרְקִ֣יעַ הַשָּׁמַ֔יִם לְהָאִ֖יר עַל־הָאָ֑רֶץ וַֽיְהִי־כֵֽן׃"],
+                ["אָזַן", "To Hear or Listen To (Hif.)", "Gen 4:23<br>וַיֹּ֨אמֶר לֶ֜מֶךְ לְנָשָׁ֗יו עָדָ֤ה וְצִלָּה֙ שְׁמַ֣עַן קוֹלִ֔י נְשֵׁ֣י לֶ֔מֶךְ הַאְזֵ֖נָּה אִמְרָתִ֑י כִּ֣י אִ֤ישׁ הָרַ֙גְתִּי֙ לְפִצְעִ֔י וְיֶ֖לֶד לְחַבֻּרָתִֽי׃"],
+                ["אָמֵץ", "To Be Strong, Brave", "Ruth 1:18<br>וַתֵּ֕רֶא כִּֽי־מִתְאַמֶּ֥צֶת הִ֖יא לָלֶ֣כֶת אִתָּ֑הּ וַתֶּחְדַּ֖ל לְדַבֵּ֥ר אֵלֶֽיהָ׃"],
+                ["אָפָה", "To Bake", "1 Sam 28:24<br>וְלָאִשָּׁ֤ה עֵֽגֶל־מַרְבֵּק֙ בַּבַּ֔יִת וַתְּמַהֵ֖ר וַתִּזְבָּחֵ֑הוּ וַתִּקַּח־קֶ֣מַח וַתָּ֔לָשׁ וַתֹּפֵ֖הוּ מַצּֽוֹת׃"],
+                ["אָרַב", "To Lie In Ambush, Wait For", "1 Sam 15:5<br>וַיָּבֹ֥א שָׁא֖וּל עַד־עִ֣יר עֲמָלֵ֑ק וַיָּ֖רֶב בַּנָּֽחַל׃"],
+                ["אָרַךְ", "To Lengthen, Make Long", "ְGen 26:8<br>...וַיְהִ֗י כִּ֣י אָֽרְכוּ־ל֥וֹ שָׁם֙ הַיָּמִ֔ים"],
+                ["אָשַׁם", "To Incur Guilt, Be Guilty", "Jer 50:7<br>כָּל־מוֹצְאֵיהֶ֣ם אֲכָל֔וּם וְצָרֵיהֶ֥ם אָמְר֖וּ לֹ֣א נֶאְשָׁ֑ם"],
+                ["בָּגַד", "To Treat or Deal Faithlessly, Treacherously", "1 Sam 14:33<br>וַיֹּ֣אמֶר בְּגַדְתֶּ֔ם גֹּֽלּוּ־אֵלַ֥י הַיּ֖וֹם אֶ֥בֶן גְּדוֹלָֽה׃"],
+                ["בָּדַל", "To Separate, Divide, Distinguish (Nif./Hif.)", "Num 16:9<br>הַמְעַ֣ט מִכֶּ֗ם כִּֽי־הִבְדִּיל֩ אֱלֹהֵ֨י יִשְׂרָאֵ֤ל אֶתְכֶם֙ מֵעֲדַ֣ת יִשְׂרָאֵ֔ל לְהַקְרִ֥יב אֶתְכֶ֖ם אֵלָ֑יו"],
+                ["בָּהַל", "To Be Terrified", "1 Sam 28:21<br>וַתָּב֤וֹא הָֽאִשָּׁה֙ אֶל־שָׁא֔וּל וַתֵּ֖רֶא כִּי־נִבְהַ֣ל מְאֹ֑ד"], 
+                ["בָּזָה", "To Despise, Think Lightly Of", "1 Sam 17:42<br>וַיַּבֵּ֧ט הַפְּלִשְׁתִּ֛י וַיִּרְאֶ֥ה אֶת־דָּוִ֖ד וַיִּבְזֵ֑הוּ כִּֽי־הָיָ֣ה נַ֔עַר וְאַדְמֹנִ֖י עִם־יְפֵ֥ה מַרְאֶֽה׃"],
+                ["בָּזַז", "To Plunder, Loot", "Gen 34:27<br>בְּנֵ֣י יַעֲקֹ֗ב בָּ֚אוּ עַל־הַ֣חֲלָלִ֔ים וַיָּבֹ֖זּוּ הָעִ֑יר אֲשֶׁ֥ר טִמְּא֖וּ אֲחוֹתָֽם׃"],
+                ["בָּחַן", "To Test", "Gen 42:15<br>בְּזֹ֖את תִּבָּחֵ֑נוּ חֵ֤י פַרְעֹה֙ אִם־תֵּצְא֣וּ מִזֶּ֔ה כִּ֧י אִם־בְּב֛וֹא אֲחִיכֶ֥ם הַקָּטֹ֖ן הֵֽנָּה׃"],
+                ["בָּלַל", "To Mix, Confuse, Pour", "Gen 11:7<br>הָ֚בָה נֵֽרְדָ֔ה וְנָבְלָ֥ה שָׁ֖ם שְׂפָתָ֑ם אֲשֶׁר֙ לֹ֣א יִשְׁמְע֔וּ אִ֖ישׁ שְׂפַ֥ת רֵעֵֽהוּ׃"],
+                ["בָּצַר", "To Be Inaccessible, Fortify, Enclose", "Gen 11:6<br>וְעַתָּה֙ לֹֽא־יִבָּצֵ֣ר מֵהֶ֔ם כֹּ֛ל אֲשֶׁ֥ר יָזְמ֖וּ לַֽעֲשֽׂוֹ..."],
+                ["בָּשַׁל", "To Boil, Cook", "1 Sam 2:15<br>וְלֹֽא־יִקַּ֧ח מִמְּךָ֛ בָּשָׂ֥ר מְבֻשָּׁ֖ל כִּ֥י אִם־חָֽי׃..."],
+                ["גָּבַהּ", "To Be Lofty, Exalted", "Prov 18:12<br>לִפְנֵי־שֶׁ֭בֶר יִגְבַּ֣הּ לֵב־אִ֑ישׁ וְלִפְנֵ֖י כָב֣וֹד עֲנָוָֽה׃"],
+                ["גָּזַל", "To Tear Off, Seize, Rob", "Gen 21:25<br>וְהוֹכִ֥חַ אַבְרָהָ֖ם אֶת־אֲבִימֶ֑לֶךְ עַל־אֹדוֹת֙ בְּאֵ֣ר הַמַּ֔יִם אֲשֶׁ֥ר גָּזְל֖וּ עַבְדֵ֥י אֲבִימֶֽלֶךְ׃"],
+                ["גִּיל", "To Rejoice, Shout With Joy", "Isa 48:13<br>...רָנּ֤וּ שָׁמַ֙יִם֙ וְגִ֣ילִי אָ֔רֶץ"],
+                ["גָּמַל", "To Render, Do, Repay, Wean", "1 Sam 1:22<br>וְחַנָּ֖ה לֹ֣א עָלָ֑תָה כִּֽי־אָמְרָ֣ה לְאִישָׁ֗הּ עַ֣ד יִגָּמֵ֤ל הַנַּ֙עַר֙ וַהֲבִאֹתִ֗יו וְנִרְאָה֙ אֶת־פְּנֵ֣י יְהוָ֔ה וְיָ֥שַׁב שָׁ֖ם עַד־עוֹלָֽם׃"],
+                ["גָּנַב", "To Rob, Steal, Deceive", "Gen 44:8<br>וְאֵ֗יךְ נִגְנֹב֙ מִבֵּ֣ית אֲדֹנֶ֔יךָ כֶּ֖סֶף א֥וֹ זָהָֽב..."],
+                ["גָּרַשׁ", "To Banish, Divorce, Cast Out", "(example of גָּרַשׁ usage)"],
+                ["דָּמָה", "To Be Like, Resemble (Qal) / To Compare, Liken (Pi.)", "Esther 4:13<br>וַיֹּ֥אמֶר מָרְדֳּכַ֖י לְהָשִׁ֣יב אֶל־אֶסְתֵּ֑ר אַל־תְּדַמִּ֣י בְנַפְשֵׁ֔ךְ לְהִמָּלֵ֥ט בֵּית־הַמֶּ֖לֶךְ מִכָּל־הַיְּהוּדִֽים׃"],
+                ["דָּמַם", "To Be Still, Silent", "(example of דָּמַם usage)"],
+                ["הָגָה", "To Moan, Mutter, Ponder", "(example of הָגָה usage)"],
+                ["הָמָה", "To Make A Noise, Uproar, Roar", "(example of הָמָה usage)"],
+                ["הָרָה", "To Conceive, Be Pregnant", "(example of הָרָה usage)"],
+                ["הָרַס", "To Demolish, Destroy", "(example of הָרַס usage)"],
+                ["זוּב", "To Flow, Trickle", "(example of זוּב usage)"],
+                ["זָמַר", "To Sing, Play An Instrument (Pi.) / To Trim, Prune", "(example of זָמַר usage)"],
+                ["זָקֵן", "To Be Old", "(example of זָקֵן usage)"],
+                ["זָרָה", "To Scatter, Winnow", "(example of זָרָה usage)"],
+                ["זָרַק", "To Scatter, Sprinkle", "(example of זָרַק usage)"],
+                ["חָבָא", "To Hide, Be Hidden", "(example of חָבָא usage)"],
+                ["חָבַר", "To Ally, Join Forces, Tie", "(example of חָבַר usage)"],
+            ];
+            let vocab_258_293 = [
+                ["חָבַשׁ", "To Bind, Bind Up", "(example of חָבַשׁ usage)"],
+                ["חָגַר", "To Gird Oneself, Put On A Belt", "(example of חָגַר usage)"],
+                ["חָכַם", "To Be Wise, Able, Skillful", "(example of חָכַם usage)"],
+                ["חָלַם", "To Dream", "(example of חָלַם usage)"],
+                ["חָלַף", "To Pass By, Vanish (Qal) / To Replace, Change (Hif.)", "(example of חָלַף usage)"],
+                ["חָלַץ", "To Prepare For Battle, Equip For War", "(example of חָלַץ usage)"],
+                ["חָמַל", "To Spare, Have Compassion On", "(example of חָמַל usage)"],
+                ["חָסָה", "To Seek Refuge", "(example of חָסָה usage)"],
+                ["חָצַב", "To Hew, Quarry", "(example of חָצַב usage)"],
+                ["חָקַר", "To Search, Investigate", "(example of חָקַר usage)"],
+                ["חָרֵב", "To Be Dry, Desolate / To Attack, Slaughter", "(example of חָרֵב usage)"],
+                ["חָרַד", "To Tremble, Startle", "(example of חָרַד usage)"],
+                ["חָרַף", "To Taunt, Mock, Reproach", "(example of חָרַף usage)"],
+                ["חָשַׂךְ", "To Restrain, Refrain, Hold Back", "(example of חָשַׂךְ usage)"],
+                ["חָתַם", "To Affix A Seal, Seal", "(example of חָתַם usage)"],
+                ["טוֹב", "To Be Good, Do Good", "(example of טוֹב usage)"],
+                ["טָמַן", "To Hide, Conceal", "(example of טָמַן usage)"],
+                ["טָרַף", "To Tear In Pieces, Rend", "(example of טָרַף usage)"],
+                ["יָגַע", "To Grow Weary, Toil", "(example of יָגַע usage)"],
+                ["יָהַב", "To Give (Qal Imptv.) (M.S. הַב or הָבָה) (M.P. הָבוּ)", "(example of יָהַב usage)"],
+                ["יָחַל", "To Wait, Terry, Hope", "(example of יָחַל usage)"],
+                ["יָלַל", "To Howl, Wail (Hif.)", "(example of יָלַל usage)"],
+                ["יָנַק", "To Suck, Suckle", "(example of יָנַק usage)"],
+                ["יָסַד", "To Establish, Assign, Found, Lay Foundation", "(example of יָסַד usage)"],
+                ["יָסַר", "To Correct, Discipline, Admonish", "(example of יָסַר usage)"],
+                ["יָצַב", "To Take One's Stand, Take A Position, Resist (Hitp.)", "(example of יָצַב usage)"],
+                ["יָצַת", "To Kindle, Burn", "(example of יָצַת usage)"],
+                ["יָשַׁר", "To Be Upright, Just, Pleasing", "(example of יָשַׁר usage)"],
+                ["כּוּל", "To Hold, Contain, Provide, Support", "(example of כּוּל usage)"],
+                ["כָּחַד", "To Hide, Destroy, Efface", "(example of כָּחַד usage)"],
+                ["כָּלַם", "To Shame, Disgrace, Hurt", "(example of כָּלַם usage)"],
+                ["כָּנַע", "To Be Humble, Subdued (Nif.) / Humble, Subdue (Hif.)", "(example of כָּנַע usage)"],
+                ["כָּרַע", "To Bend The Knee, Crouch", "(example of כָּרַע usage)"],
+                ["לִיץ", "To Scorn, Deride", "(example of לִיץ usage)"],
+                ["לָקַט", "To Glean, Gather,", "(example of לָקַט usage)"],
+                ["מָאֵן", "To Refuse (Pi.)", "(example of מָאֵן usage)"],
+            ];
+            let vocab_294_329 = [
+                ["מוּט", "To Waiver, Reel, Totter, Stagger, Flinch", "(example of מוּט usage)"],
+                ["מוּל", "To Circumcise", "(example of מוּל usage)"],
+                ["מָחָה", "To Wipe Out, Blot Out", "(example of מָחָה usage)"],
+                ["מָנָה", "To Count, Number, Reckon, Assign", "(example of מָנָה usage)"],
+                ["מָנַע", "Hold Back, Withhold", "(example of מָנַע usage)"],
+                ["מָעַל", "To Be Unfaithful", "(example of מָעַל usage)"],
+                ["מָרָה", "To Be Rebellious, Obstinate", "(example of מָרָה usage)"],
+                ["מָשַׁךְ", "To Pull, Drag, Draw", "(example of מָשַׁךְ usage)"],
+                ["נָאַף", "To Commit Adultery", "(example of נָאַף usage)"],
+                ["נָאַץ", "To Despise, Condemn", "(example of נָאַץ usage)"],
+                ["נָגַף", "To Injure, Strike", "(example of נָגַף usage)"],
+                ["נָדַד", "To Flee, Wander", "(example of נָדַד usage)"],
+                ["נָדַר", "To Make A Vow", "(example of נָדַר usage)"],
+                ["נָהַג", "To Lead, Drive, Guide", "(example of נָהַג usage)"],
+                ["נוּעַ", "To Shake, Wave, Tremble, Totter", "(example of נוּעַ usage)"],
+                ["נוּף", "To Wield, Wave, Move Back And Forth", "(example of נוּף usage)"],
+                ["נָחָה", "To Lead, Guide", "(example of נָחָה usage)"],
+                ["נָטַשׁ", "To Leave, Forsake", "(example of נָטַשׁ usage)"],
+                ["נָסָה", "To Test, Try (Pi.)", "(example of נָסָה usage)"],
+                ["נָסַךְ", "To Pour Out", "(example of נָסַךְ usage)"],
+                ["נָקַב", "To Pierce, Bore / Designate", "(example of נָקַב usage)"],
+                ["נָקָה", "To Be Free, Innocent, Unpunished", "(example of נָקָה usage)"],
+                ["נָקַם", "To Take Revenge, Avenge", "(example of נָקַם usage)"],
+                ["נָשַׁק", "To Kiss", "(example of נָשַׁק usage)"],
+                ["נָתַץ", "To Tear Down, Demolish", "(example of נָתַץ usage)"],
+                ["נָתַק", "To Tear Away", "(example of נָתַק usage)"],
+                ["סָלַח", "To Forgive, Pardon", "(example of סָלַח usage)"],
+                ["סָמַךְ", "To Support, Uphold", "(example of סָמַךְ usage)"],
+                ["סָפַד", "To Wail, Lament", "(example of סָפַד usage)"],
+                ["עוּד", "To Witness", "(example of עוּד usage)"],
+                ["עוּף", "To Fly", "(example of עוּף usage)"],
+                ["עָצַר", "To Restrain, Detain, Shut", "(example of עָצַר usage)"],
+                ["עָרַב", "To Take A Pledge, Stand Surety For", "(example of עָרַב usage)"],
+                ["עָשַׁק", "To Oppress, Exploit, Extort", "(example of עָשַׁק usage)"],
+                ["פָּגַע", "To Attack, Molest, Encounter", "(example of פָּגַע usage)"],
+                ["פָּחַד", "To Dread, Fear", "(example of פָּחַד usage)"],
+            ];
+            let vocab_330_368 = [
+                ["פָּלַט", "To Escape, Bring To Safety", "verse<br>example"],
+                ["פָּרָה", "To Bear Fruit, Be Fruitful", "verse<br>example"],
+                ["פָּרַח", "To Bud, Sprout", "verse<br>example"],
+                ["פָּרַץ", "To Break Through, Break Into", "verse<br>example"],
+                ["פָּשַׁט", "To Take Off, Strip Off, Undress", "verse<br>example"],
+                ["פָּשַׁע", "To Rebel, Transgress", "verse<br>example"],
+                ["צָדַק", "To Be Just, Righteous, Vindicated", "verse<br>example"],
+                ["צוּר", "To Bind, Besiege", "verse<br>example"],
+                ["צָמַח", "To Sprout, Spring Up", "verse<br>example"],
+                ["צָפַן", "To Hide, Store Up, Treasure", "verse<br>example"],
+                ["צָרַף", "To Smelt, Refine, Test", "verse<br>example"],
+                ["קָדַם", "To Be In Front, Go Before, Meet (Pi.)", "verse<br>example"],
+                ["קָהַל", "To Assemble (Nif.) / To Call an Assembly, Summon (Hif.)", "verse<br>example"],
+                ["קָוָה", "To Wait For, Expect", "verse<br>example"],
+                ["קָנָא", "To Be Zealous, Eager, Jealous (Pi./Hif.)", "verse<br>example"],
+                ["קָצַף", "To Be Angry", "verse<br>example"],
+                ["קָצַר", "To Reap, Harvest", "verse<br>example"],
+                ["קָרָה", "To Meet, Happen, Befall", "verse<br>example"],
+                ["קָשַׁב", "To Pay Attention, Listen Carefully", "verse<br>example"],
+                ["קָשָׁה", "To Be Hard, Difficult, Stubborn", "verse<br>example"],
+                ["קָשַׁר", "To Bind, Tie, Conspire", "verse<br>example"],
+                ["רָבַץ", "To Lie Down, Crouch", "verse<br>example"],
+                ["רָגַז", "To Be Upset, Perturbed / Shake, Tremble", "verse<br>example"],
+                ["רָגַל", "To Explore, Spy", "verse<br>example"],
+                ["רוּעַ", "To Shout (Hif.)", "verse<br>example"],
+                ["רוּשׁ", "To Be Poor", "verse<br>example"],
+                ["רָחַב", "To Extend, Make Room For", "verse<br>example"],
+                ["רָעַשׁ", "To Quake, Shake", "verse<br>example"],
+                ["רָפָה", "To Lose Heart, Lose Courage, Drop, Sink (Qal) / To Abandon, Forsake (Hif.)", "verse<br>example"],
+                ["רָצַח", "To Murder, Slay", "verse<br>example"],
+                ["רָשַׁע", "To Do Wrong, Be Guilty (Qal) / To Do Wrong, Condemn as Guilty, Pronounce Guilt (Hif.)", "verse<br>example"],
+                ["שׂוּשׂ", "To Exult, Rejoice", "verse<br>example"],
+                ["שָׂחַק", "To Laugh, Play", "verse<br>example"],
+                ["שָׁבָה", "To Take Captive", "verse<br>example"],
+                ["שָׁטַף", "To Flood, Overflow, Wash Off", "verse<br>example"],
+                ["שָׁפֵל", "To Be Low, Abased", "verse<br>example"],
+                ["שָׁקַט", "To Be Quiet, Idle, Undisturbed", "verse<br>example"],
+            ];
+
+            let heb721_translation_vocab = [
+                ["ערך", "To arrange, set in order", "1 Sam 17:8<br>וַיֹּ֣אמֶר לָהֶ֔ם לָ֥מָּה תֵצְא֖וּ לַעֲרֹ֣ךְ מִלְחָמָ֑ה"],
+                ["יצא", "To come or go out", "1 Sam 17:8<br>וַיֹּ֣אמֶר לָהֶ֔ם לָ֥מָּה תֵצְא֖וּ לַעֲרֹ֣ךְ מִלְחָמָ֑ה"],
+                ["לחם", "To fight", "1 Sam 17:9<br>אִם־יוּכַ֞ל לְהִלָּחֵ֤ם אִתִּי֙"],
+                ["עֶ֫בֶד", "Slave, servant", "1 Sam 17:9<br>וִהְיִ֤יתֶם לָ֙נוּ֙ לַעֲבָדִ֔ים וַעֲבַדְתֶּ֖ם אֹתָֽנוּ׃"],
+                ["ברה", "To choose", "1 Sam 17:8<br>בְּרוּ־לָכֶ֥ם אִ֖ישׁ וְיֵרֵ֥ד אֵלָֽי"],
+                ["יכל", "To be able", "1 Sam 17:9<br>אִם־יוּכַ֞ל לְהִלָּחֵ֤ם אִתִּי֙"],
+                ["נכה", "To strike, injure", "1 Sam 17:9<br>וְהִכָּ֔נִי וְהָיִ֥ינוּ לָכֶ֖ם לַעֲבָדִ֑ים וְאִם־אֲנִ֤י אֽוּכַל־לוֹ֙ וְהִכִּיתִ֔יו"],
+                ["חרף", "To defy, taunt, annoy", "1 Sam 17:10<br>וַיֹּ֙אמֶר֙ הַפְּלִשְׁתִּ֔י אֲנִ֗י חֵרַ֛פְתִּי אֶת־מַעַרְכ֥וֹת יִשְׂרָאֵ֖ל הַיּ֣וֹם הַזֶּ֑ה"],
+                ["יָֽחַד", "Together", "1 Sam 17:10<br>"],
+                ["חתת", "To be shattered, dismayed, disheartened, filled with terror", "1 Sam 17:11<br>וַיֵּחַ֥תּוּ וַיִּֽרְא֖וּ מְאֹֽד"],
+                ["ירא", "To fear, be afraid", "1 Sam 17:11<br>וַיֵּחַ֥תּוּ וַיִּֽרְא֖וּ מְאֹֽד"],
+                ["שְׁמֹנֶה", "Eight, eighty", "1 Sam 17:12<br>וְל֖וֹ שְׁמֹנָ֣ה בָנִ֑ים"],
+                ["בְּכֹר", "Firstborn, oldest", "1 Sam 17:13<br>אֱלִיאָ֣ב הַבְּכ֗וֹר"],
+                ["רעה", "To feed, shepherd, pasture", "1 Sam 17:15<br>וְדָוִ֛ד הֹלֵ֥ךְ וָשָׁ֖ב מֵעַ֣ל שָׁא֑וּל לִרְע֛וֹת אֶת־צֹ֥אן אָבִ֖יו בֵּֽית־לָֽחֶם"],
+                ["נגשׁ", "To step forward, approach, advance", "1 Sam 17:16<br>וַיִּגַּ֥שׁ הַפְּלִשְׁתִּ֖י הַשְׁכֵּ֣ם וְהַעֲרֵ֑ב"],
+                ["שׁכם", "To do early, get up early, start early", "1 Sam 17:20<br>וַיַּשְׁכֵּ֨ם דָּוִ֜ד בַּבֹּ֗קֶר וַיִּטֹּ֤שׁ אֶת־הַצֹּאן֙"],
+                ["חָרִיץ", "Slice or portion", "1 Sam 17:18<br>וְ֠אֵת עֲשֶׂ֜רֶת חֲרִצֵ֤י הֶֽחָלָב֙"],
+                ["חָלָב", "Milk (or cheese)", "1 Sam 17:18<br>וְ֠אֵת עֲשֶׂ֜רֶת חֲרִצֵ֤י הֶֽחָלָב֙"],
+                ["שׁמר", "To keep", "1 Sam 17:18<br>וַיִּטֹּ֤שׁ אֶת־הַצֹּאן֙ עַל־שֹׁמֵ֔ר"],
+                ["צוה", "To give an order, command", "1 Sam 17:20<br>וַיֵּ֔לֶךְ כַּאֲשֶׁ֥ר צִוָּ֖הוּ יִשָׁ֑י"],
+                ["מַעְגָּל", "Circular camp, ring of wagons", "1 Sam 17:20<br>וַיָּבֹא֙ הַמַּעְגָּ֔לָה"],
+                // ["xxxxxxxxx", "xxxxxxxxx", "(example)"],
+            ];
+
+            all_decks = [
+               vocab_221_257,
+               vocab_258_293, 
+               vocab_294_329,
+               vocab_330_368,
+               null,
+               null,
+               null,
+               null,
+               null,
+               null,
+               null,
+               null,
+               null,
+               heb721_translation_vocab,
+            ];
+            deck_index = 0;
+
+            vocab_list = all_decks[deck_index].slice();  // copy the original
+            orig_length = vocab_list.length;
+            subset = [];
+
+            mode = [
+                'rehearse',
+                'review',
+                'recognize',
+                'restore'
+            ];
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }            
+
+            function update_progress(pct) {
+                $( "#progressbar" ).progressbar({ value: pct });                
+            }
+
+            function get_word() {
+                if (vocab_list.length > 0) {
+                    vocab_index = getRandomInt(0, vocab_list.length - 1);
+                    vocab = vocab_list[vocab_index];
+                    vocab_list.splice(vocab_index, 1);
+                } else {
+                    return ['DONE', '(all done)', ''];
+                }
+                return vocab;
+            }
+
+            function load_saved_subset() {
+                subset = [];
+                subset_encoded = localStorage.getItem(`sdt-vocab-review-subset-${deck_index}`);
+                if (subset_encoded) {
+                    subset = subset_encoded.split('|');
+                    for (vidx in subset) {
+                        word = subset[vidx];
+                        element_id = 'vocab_' + word;
+                        $("#" + element_id).prop('checked', true);
+                    }
+                }
+                console.log(`subset retrieved = '${subset}'`);
+            }
+
+            function apply_subset() {
+                vocab_list = all_decks[deck_index].slice();  // copy the original
+                potential_size = vocab_list.length;
+
+                if (subset.length > 0) {
+                    for (var i = vocab_list.length - 1; i >= 0; i--) {
+                        v = vocab_list[i][0];
+                        if (subset.indexOf(v) == -1) {
+                            vocab_list.splice(i, 1);
+                        }
+                    }
+                } 
+                if (vocab_list.length == 0) {
+                    console.log('Subset mismatch; defaulting to all words in deck.');
+                    vocab_list = all_decks[deck_index].slice();  // copy the original
+                }
+
+                console.log('vocab_list now size ' + vocab_list.length);
+                info = `(${vocab_list.length} of ${potential_size} selected)`;
+                $("#subset_info").text(info);
+
+                orig_length = vocab_list.length;
+                vocab = get_word();
+                $("#word").html(vocab[0]);
+                $("#definition").html(vocab[1]);
+                $("#example").html(vocab[2]); 
+
+                $("#action").html("Answer...");
+                // update_progress(0);
+                $("#action").focus();
+            }
+
+            $(document).ready(function() {
+
+                urlParams = new URLSearchParams(window.location.search);
+                deck_index = urlParams.get('deck');
+                if (deck_index) {
+                    console.log('Requested deck: ' + deck_index);
+                    vocab_list = all_decks[deck_index].slice();  // copy the original
+                    orig_length = vocab_list.length;
+                } else {
+                    deck_index = 0;
+                }
+
+                $("#word").css("font-size", "40px");
+                $("#definition").css('visibility', 'hidden');
+                $("#example").css('visibility', 'hidden');
+
+                div_words = $("#selectable_word_list")
+                for (let vidx in vocab_list) {
+                    word = vocab_list[vidx][0];
+                    element_id = 'vocab_' + word;
+                    description = `<span style="font-family:'Times New Roman'; font-size:30px">&nbsp;${word}</span>&nbsp;:&nbsp;${vocab_list[vidx][1]}`;
+                    div_words.append(`<label><input type="checkbox" id="${element_id}" name="vocab" value="${word}">${description}</label>`);
+                }
+
+                load_saved_subset();
+                apply_subset();
+            });
+
+            function action_click() {
+                caption = $("#action").html();
+                if (caption == "Answer...") {
+                    $("#definition").css('visibility', '');
+                    $("#example").css('visibility', '');
+                    caption = "Next Word";
+                } else if (caption == "Next Word") {
+                    $("#definition").css('visibility', 'hidden');
+                    $("#example").css('visibility', 'hidden');
+
+                    progress = ((orig_length - vocab_list.length) / orig_length) * 100;
+                    // update_progress(progress);
+
+                    vocab = get_word();
+                    $("#word").html(vocab[0]);
+                    $("#definition").html(vocab[1]);
+                    $("#example").html(vocab[2]);
+
+                    if (vocab[0] != 'DONE') {
+                        caption = "Answer...";
+                    } else {
+                        caption = "Restart";
+                    }
+                } else if (caption == "Restart") {
+                    window.location.reload();
+                }
+                $("#action").html(caption);
+            }
+
+            function apply_vocab_selection() {
+                console.log('Selecting subset of vocab');
+                subset = [];
+                $("input[name='vocab']").each(function() {
+                    if (this.checked) {
+                        subset.push(this.value);
+                    }
+                });
+                console.log(`Found ${subset.length} vocab words selected`);
+                subset_encoded = subset.join('|');
+                console.log(`subset_encoded = '${subset_encoded}'`)
+                localStorage.setItem(`sdt-vocab-review-subset-${deck_index}`, subset_encoded);
+
+                $("#selectable_word_list_section").collapsible( "option", "collapsed", true );
+                apply_subset();
+            }
+        </script>
+    </head>
+    <body>
+        <div data-role="page">
+
+            <div data-role="header">
+                <h1>Hebrew 721 Vocab Review</h1>
+            </div><!-- /header -->
+
+            <div role="main" class="ui-content">
+                <div class="ui-corner-all custom-corners">
+                    <div id="progressbar"></div>
+                    <div class="ui-body ui-body-a">
+                        <p id="word" style="font-family:'Times New Roman'; text-align: center;">Word</p>
+                        <p id="definition" style="text-align: center;">Definition</p>
+                        <p id="example" style="font-family:'Times New Roman'; font-size: 24px; text-align: center;">Example</p>
+                        <button id="action" onclick="action_click();">Action</button>
+                    </div>
+                </div>
+                <div data-role="collapsible">
+                    <h4>Mode</h4>
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <input type="radio" name="mode" id="mode-rehearse" value="on" checked="checked"> 
+                        <label for="mode-rehearse">Rehearse</label>
+                        <input type="radio" name="mode" id="mode-review" value="off">
+                        <label for="mode-review">Review</label>
+                    </fieldset>                
+                </div>
+                <div id="selectable_word_list_section" data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                    <h4>Word List <span id="subset_info"></span></h4>
+                    <button onclick="apply_vocab_selection();">Apply Selection and Begin</button>
+                    <div id="selectable_word_list"></div>
+                    <button onclick="apply_vocab_selection();">Apply Selection and Begin</button>
+                </div>
+            </div>
+            <div data-role="footer">
+            </div><!-- /footer -->
+        </div><!-- /page -->
+    </body>
+</html>
