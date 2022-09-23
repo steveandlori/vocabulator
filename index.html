@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
         @font-face {
-            font-family: 'Times New Roman';
+            font-family: 'SBL_Hebrew';
             src: url(SBL_Hbrw.ttf) format('truetype');
         }  
 i       </style>        
@@ -317,7 +317,7 @@ i       </style>
                 for (let vidx in vocab_list) {
                     word = vocab_list[vidx][0];
                     element_id = 'vocab_' + word;
-                    description = `<span style="font-family:'Times New Roman'; font-size:30px">&nbsp;${word}</span>&nbsp;:&nbsp;${vocab_list[vidx][1]}`;
+                    description = `<span style="font-family:'SBL_Hebrew'; font-size:30px">&nbsp;${word}</span>&nbsp;:&nbsp;${vocab_list[vidx][1]}`;
                     div_words.append(`<label><input type="checkbox" id="${element_id}" name="vocab" value="${word}">${description}</label>`);
                 }
 
@@ -383,9 +383,9 @@ i       </style>
                 <div class="ui-corner-all custom-corners">
                     <div id="progressbar"></div>
                     <div class="ui-body ui-body-a">
-                        <p id="word" style="font-family:'Times New Roman'; text-align: center;">Word</p>
+                        <p id="word" style="font-family:'SBL_Hebrew'; text-align: center;">Word</p>
                         <p id="definition" style="text-align: center;">Definition</p>
-                        <p id="example" style="font-family:'Times New Roman'; font-size: 24px; text-align: center;">Example</p>
+                        <p id="example" style="font-family:'SBL_Hebrew'; font-size: 24px; text-align: center;">Example</p>
                         <button id="action" onclick="action_click();">Action</button>
                     </div>
                 </div>
