@@ -104,6 +104,8 @@ i       </style>
                 $("#word").html(vocab[0]);
                 $("#definition").html(vocab[1]);
                 $("#example").html(vocab[2]); 
+                $("#mixed").html(vocab[3]); 
+                $("#mnemonic").html(vocab[4]); 
 
                 $("#action").html("Answer...");
                 update_progress(0);
@@ -126,6 +128,8 @@ i       </style>
                 $("#word").css("font-size", "45px");
                 $("#definition").css('visibility', 'hidden');
                 $("#example").css('visibility', 'hidden');
+                $("#mixed").css('visibility', 'hidden');
+                $("#mnemonic").css('visibility', 'hidden');
 
                 div_words = $("#selectable_word_list")
                 for (let vidx in vocab_list) {
@@ -144,10 +148,14 @@ i       </style>
                 if (caption == "Answer...") {
                     $("#definition").css('visibility', '');
                     $("#example").css('visibility', '');
+                    $("#mixed").css('visibility', '');
+                    $("#mnemonic").css('visibility', '');
                     caption = "Next Word";
                 } else if (caption == "Next Word") {
                     $("#definition").css('visibility', 'hidden');
                     $("#example").css('visibility', 'hidden');
+                    $("#mixed").css('visibility', 'hidden');
+                    $("#mnemonic").css('visibility', 'hidden');
 
                     progress = ((orig_length - vocab_list.length) / orig_length) * 100;
                     update_progress(progress);
@@ -156,6 +164,8 @@ i       </style>
                     $("#word").html(vocab[0]);
                     $("#definition").html(vocab[1]);
                     $("#example").html(vocab[2]);
+                    $("#mixed").html(vocab[3]);
+                    $("#mnemonic").html(vocab[4]);
 
                     if (vocab[0] != 'DONE') {
                         caption = "Answer...";
@@ -199,7 +209,9 @@ i       </style>
                     <div class="ui-body ui-body-a">
                         <p id="word" style="font-family:'SBL_Hebrew'; text-align: center;">Word</p>
                         <p id="definition" style="text-align: center;">Definition</p>
-                        <p id="example" style="font-family:'SBL_Hebrew'; font-size: 24px; text-align: center;">Example</p>
+                        <p id="example" style="font-family:'SBL_Hebrew'; font-size: 24px; text-align: center;">Hebrew Example</p>
+                        <p id="mixed" style="font-family:'SBL_Hebrew'; font-size: 24px; text-align: center;">Mixed Example</p>
+                        <p id="mnemonic" style="text-align: center;">Mnemonic</p>
                         <button id="action" onclick="action_click();">Action</button>
                     </div>
                 </div>
