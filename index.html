@@ -11,9 +11,17 @@
             font-family: 'SBL_Hebrew';
             src: url(SBL_Hbrw.ttf) format('truetype');
         }  
+        #myProgress {
+            width: 100%;
+            border: 1px;
+        }
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: goldenrod;
+        }
 i       </style>        
         <script>
-            // TODO: revise progress bar w/ https://www.w3schools.com/howto/howto_js_progressbar.asp
             // TODO: Store last date of review for all sets in the list and show the number of days elapsed since review
             // TODO: add clear-all-selection-and-apply AND invert-selection-and-apply buttons
             // TODO: randomize entire list and then just move an index to allow for forward / backward
@@ -178,36 +186,87 @@ i       </style>
                 ["שָׁקַט", "To Be Quiet, Idle, Undisturbed", "verse<br>example"],
             ];
 
-            let heb721_translation_vocab = [
-                ["ערך", "To arrange, set in order", "1 Sam 17:8<br>וַיֹּ֣אמֶר לָהֶ֔ם לָ֥מָּה תֵצְא֖וּ לַעֲרֹ֣ךְ מִלְחָמָ֑ה"],
-                ["יצא", "To come or go out", "1 Sam 17:8<br>וַיֹּ֣אמֶר לָהֶ֔ם לָ֥מָּה תֵצְא֖וּ לַעֲרֹ֣ךְ מִלְחָמָ֑ה"],
-                ["לחם", "To fight", "1 Sam 17:9<br>אִם־יוּכַ֞ל לְהִלָּחֵ֤ם אִתִּי֙"],
-                ["עֶ֫בֶד", "Slave, servant", "1 Sam 17:9<br>וִהְיִ֤יתֶם לָ֙נוּ֙ לַעֲבָדִ֔ים וַעֲבַדְתֶּ֖ם אֹתָֽנוּ׃"],
-                ["ברה", "To choose", "1 Sam 17:8<br>בְּרוּ־לָכֶ֥ם אִ֖ישׁ וְיֵרֵ֥ד אֵלָֽי"],
-                ["יכל", "To be able", "1 Sam 17:9<br>אִם־יוּכַ֞ל לְהִלָּחֵ֤ם אִתִּי֙"],
-                ["נכה", "To strike, injure", "1 Sam 17:9<br>וְהִכָּ֔נִי וְהָיִ֥ינוּ לָכֶ֖ם לַעֲבָדִ֑ים וְאִם־אֲנִ֤י אֽוּכַל־לוֹ֙ וְהִכִּיתִ֔יו"],
-                ["חרף", "To defy, taunt, annoy", "1 Sam 17:10<br>וַיֹּ֙אמֶר֙ הַפְּלִשְׁתִּ֔י אֲנִ֗י חֵרַ֛פְתִּי אֶת־מַעַרְכ֥וֹת יִשְׂרָאֵ֖ל הַיּ֣וֹם הַזֶּ֑ה"],
-                ["יָֽחַד", "Together", "1 Sam 17:10<br>"],
-                ["חתת", "To be shattered, dismayed, disheartened, filled with terror", "1 Sam 17:11<br>וַיֵּחַ֥תּוּ וַיִּֽרְא֖וּ מְאֹֽד"],
-                ["ירא", "To fear, be afraid", "1 Sam 17:11<br>וַיֵּחַ֥תּוּ וַיִּֽרְא֖וּ מְאֹֽד"],
-                ["שְׁמֹנֶה", "Eight, eighty", "1 Sam 17:12<br>וְל֖וֹ שְׁמֹנָ֣ה בָנִ֑ים"],
-                ["בְּכֹר", "Firstborn, oldest", "1 Sam 17:13<br>אֱלִיאָ֣ב הַבְּכ֗וֹר"],
-                ["רעה", "To feed, shepherd, pasture", "1 Sam 17:15<br>וְדָוִ֛ד הֹלֵ֥ךְ וָשָׁ֖ב מֵעַ֣ל שָׁא֑וּל לִרְע֛וֹת אֶת־צֹ֥אן אָבִ֖יו בֵּֽית־לָֽחֶם"],
-                ["נגשׁ", "To step forward, approach, advance", "1 Sam 17:16<br>וַיִּגַּ֥שׁ הַפְּלִשְׁתִּ֖י הַשְׁכֵּ֣ם וְהַעֲרֵ֑ב"],
-                ["שׁכם", "To do early, get up early, start early", "1 Sam 17:20<br>וַיַּשְׁכֵּ֨ם דָּוִ֜ד בַּבֹּ֗קֶר וַיִּטֹּ֤שׁ אֶת־הַצֹּאן֙"],
-                ["חָרִיץ", "Slice or portion", "1 Sam 17:18<br>וְ֠אֵת עֲשֶׂ֜רֶת חֲרִצֵ֤י הֶֽחָלָב֙"],
-                ["חָלָב", "Milk (or cheese)", "1 Sam 17:18<br>וְ֠אֵת עֲשֶׂ֜רֶת חֲרִצֵ֤י הֶֽחָלָב֙"],
-                ["שׁמר", "To keep", "1 Sam 17:18<br>וַיִּטֹּ֤שׁ אֶת־הַצֹּאן֙ עַל־שֹׁמֵ֔ר"],
-                ["צוה", "To give an order, command", "1 Sam 17:20<br>וַיֵּ֔לֶךְ כַּאֲשֶׁ֥ר צִוָּ֖הוּ יִשָׁ֑י"],
-                ["מַעְגָּל", "Circular camp, ring of wagons", "1 Sam 17:20<br>וַיָּבֹא֙ הַמַּעְגָּ֔לָה"],
-                // ["xxxxxxxxx", "xxxxxxxxx", "(example)"],
+            let deck_568_600 = [
+                ["אֶבְיוֹן", "To Be Needy, Poor, In Want", "verse<br>example"],
+                ["אֶ֫דֶן", "Base, Socket, Pedestal", "verse<br>example"],
+                ["אָ֫וֶן", "Sorrow, Wickedness, Trouble", "verse<br>example"],
+                ["אוֹצָר", "Treasury, Store, Storehouse, Treasure", "verse<br>example"],
+                ["אוֹת", "Pledge, Token (M.), Sign", "verse<br>example"],
+                ["אֲחֻזָּה", "Possession", "verse<br>example"],
+                ["אַחֲרוֹן", "Behind, Later, Following / West", "verse<br>example"],
+                ["אַחֲרִית", "Outcome, Latter Part, End", "verse<br>example"],
+                ["אֱלוֹהַּ", "God", "verse<br>example"],
+                ["אַלּוּף", "Leader Of A Thousand, Chief", "verse<br>example"],
+                ["אַלְמָנָה", "Widow", "verse<br>example"],
+                ["אָמָה", "Handmaid, Female Slave", "verse<br>example"],
+                ["אֱמוּנָה", "Fidelity, Firmness, Faithfulness", "verse<br>example"],
+                ["אֵ֫מֶר", "Word, Speech", "verse<br>example"],
+                ["אֵפוֹד", "Ephod", "verse<br>example"],
+                ["אֶ֫רֶז", "Ceader", "verse<br>example"],
+                ["אֹ֫רַח", "Path, Way", "verse<br>example"],
+                ["אֲרִי", "Lion", "verse<br>example"],
+                ["אַרְיֵה", "Lion", "verse<br>example"],
+                ["אֹ֫רֶךְ", "Length", "verse<br>example"],
+                ["אִשֶּׁה", "An Offering Made By Fire", "verse<br>example"],
+                ["בּוֹר", "Pit, Well, Cistern", "verse<br>example"],
+                ["בֶּ֫טֶן", "Body, Womb (F.), Belly", "verse<br>example"],
+                ["בָּמָה", "High Place", "verse<br>example"],
+                ["בַּ֫עַל", "Lord, Ruler / Baal, Owner", "verse<br>example"],
+                ["בַּרְזֶל", "Iron", "verse<br>example"],
+                ["בְּרָכָה", "Blessing", "verse<br>example"],
+                ["גָּאוֹן", "Majesty, Exaltation, Pride", "verse<br>example"],
+                ["גְּבוּרָה", "Might, Force, Strength", "verse<br>example"],
+                ["גִּבְעָה", "Hill", "verse<br>example"],
+                ["גֶּ֫בֶר", "Man", "verse<br>example"],
+                ["גּוֹרָל", "Thing Allotted, Lot", "verse<br>example"],
+                ["גַּיְא", "Valley", "verse<br>example"],
+                ["גָּמָל", "Camel", "verse<br>example"],
+            ];
+
+            let vocab_568_600 = [
+                ["אֶבְיוֹן", "To Be Needy, Poor, In Want", "verse<br>example"],
+                ["אֶ֫דֶן", "Base, Socket, Pedestal", "verse<br>example"],
+                ["אָ֫וֶן", "Sorrow, Wickedness, Trouble", "verse<br>example"],
+                ["אוֹצָר", "Treasury, Store, Storehouse, Treasure", "verse<br>example"],
+                ["אוֹת", "Pledge, Token (M.), Sign", "verse<br>example"],
+                ["אֲחֻזָּה", "Possession", "verse<br>example"],
+                ["אַחֲרוֹן", "Behind, Later, Following / West", "verse<br>example"],
+                ["אַחֲרִית", "Outcome, Latter Part, End", "verse<br>example"],
+                ["אֱלוֹהַּ", "God", "verse<br>example"],
+                ["אַלּוּף", "Leader Of A Thousand, Chief", "verse<br>example"],
+                ["אַלְמָנָה", "Widow", "verse<br>example"],
+                ["אָמָה", "Handmaid, Female Slave", "verse<br>example"],
+                ["אֱמוּנָה", "Fidelity, Firmness, Faithfulness", "verse<br>example"],
+                ["אֵ֫מֶר", "Word, Speech", "verse<br>example"],
+                ["אֵפוֹד", "Ephod", "verse<br>example"],
+                ["אֶ֫רֶז", "Ceader", "verse<br>example"],
+                ["אֹ֫רַח", "Path, Way", "verse<br>example"],
+                ["אֲרִי", "Lion", "verse<br>example"],
+                ["אַרְיֵה", "Lion", "verse<br>example"],
+                ["אֹ֫רֶךְ", "Length", "verse<br>example"],
+                ["אִשֶּׁה", "An Offering Made By Fire", "verse<br>example"],
+                ["בּוֹר", "Pit, Well, Cistern", "verse<br>example"],
+                ["בֶּ֫טֶן", "Body, Womb (F.), Belly", "verse<br>example"],
+                ["בָּמָה", "High Place", "verse<br>example"],
+                ["בַּ֫עַל", "Lord, Ruler / Baal, Owner", "verse<br>example"],
+                ["בַּרְזֶל", "Iron", "verse<br>example"],
+                ["בְּרָכָה", "Blessing", "verse<br>example"],
+                ["גָּאוֹן", "Majesty, Exaltation, Pride", "verse<br>example"],
+                ["גְּבוּרָה", "Might, Force, Strength", "verse<br>example"],
+                ["גִּבְעָה", "Hill", "verse<br>example"],
+                ["גֶּ֫בֶר", "Man", "verse<br>example"],
+                ["גּוֹרָל", "Thing Allotted, Lot", "verse<br>example"],
+                ["גַּיְא", "Valley", "verse<br>example"],
+                ["גָּמָל", "Camel", "verse<br>example"],
             ];
 
             all_decks = [
+               null,
                vocab_221_257,
                vocab_258_293, 
                vocab_294_329,
                vocab_330_368,
+               vocab_568_600,
                null,
                null,
                null,
@@ -216,10 +275,8 @@ i       </style>
                null,
                null,
                null,
-               null,
-               heb721_translation_vocab,
             ];
-            deck_index = 0;
+            deck_index = 1;
 
             vocab_list = all_decks[deck_index].slice();  // copy the original
             orig_length = vocab_list.length;
@@ -237,7 +294,7 @@ i       </style>
             }            
 
             function update_progress(pct) {
-                $( "#progressbar" ).progressbar({ value: pct });                
+                $( "#myBar" ).width(pct + '%');
             }
 
             function get_word() {
@@ -293,7 +350,7 @@ i       </style>
                 $("#example").html(vocab[2]); 
 
                 $("#action").html("Answer...");
-                // update_progress(0);
+                update_progress(0);
                 $("#action").focus();
             }
 
@@ -306,10 +363,11 @@ i       </style>
                     vocab_list = all_decks[deck_index].slice();  // copy the original
                     orig_length = vocab_list.length;
                 } else {
-                    deck_index = 0;
+                    deck_index = 1;
                 }
 
-                $("#word").css("font-size", "40px");
+                $("#header").text("Hebrew 2 Week " + deck_index);
+                $("#word").css("font-size", "45px");
                 $("#definition").css('visibility', 'hidden');
                 $("#example").css('visibility', 'hidden');
 
@@ -317,7 +375,7 @@ i       </style>
                 for (let vidx in vocab_list) {
                     word = vocab_list[vidx][0];
                     element_id = 'vocab_' + word;
-                    description = `<span style="font-family:'SBL_Hebrew'; font-size:30px">&nbsp;${word}</span>&nbsp;:&nbsp;${vocab_list[vidx][1]}`;
+                    description = `<span style="font-family:'SBL_Hebrew'; font-size:32px">&nbsp;${word}</span>&nbsp;:&nbsp;${vocab_list[vidx][1]}`;
                     div_words.append(`<label><input type="checkbox" id="${element_id}" name="vocab" value="${word}">${description}</label>`);
                 }
 
@@ -336,7 +394,7 @@ i       </style>
                     $("#example").css('visibility', 'hidden');
 
                     progress = ((orig_length - vocab_list.length) / orig_length) * 100;
-                    // update_progress(progress);
+                    update_progress(progress);
 
                     vocab = get_word();
                     $("#word").html(vocab[0]);
@@ -376,12 +434,12 @@ i       </style>
         <div data-role="page">
 
             <div data-role="header">
-                <h1>Hebrew 721 Vocab Review</h1>
+                <h1 id="header">Hebrew 2 Vocab</h1>
             </div><!-- /header -->
 
             <div role="main" class="ui-content">
                 <div class="ui-corner-all custom-corners">
-                    <div id="progressbar"></div>
+                    <div id="myProgress"><div id="myBar"></div></div>
                     <div class="ui-body ui-body-a">
                         <p id="word" style="font-family:'SBL_Hebrew'; text-align: center;">Word</p>
                         <p id="definition" style="text-align: center;">Definition</p>
@@ -389,8 +447,9 @@ i       </style>
                         <button id="action" onclick="action_click();">Action</button>
                     </div>
                 </div>
+                <!--
                 <div data-role="collapsible">
-                    <h4>Mode</h4>
+                    <h4>Options</h4>
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <input type="radio" name="mode" id="mode-rehearse" value="on" checked="checked"> 
                         <label for="mode-rehearse">Rehearse</label>
@@ -398,6 +457,7 @@ i       </style>
                         <label for="mode-review">Review</label>
                     </fieldset>                
                 </div>
+                -->
                 <div id="selectable_word_list_section" data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                     <h4>Word List <span id="subset_info"></span></h4>
                     <button onclick="apply_vocab_selection();">Apply Selection and Begin</button>
