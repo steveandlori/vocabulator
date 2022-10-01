@@ -22,28 +22,47 @@ print()
 
 Deck = namedtuple('Deck', ['min_index', 'max_index'])
 decks_to_build = [
-    Deck(221, 257),
-    Deck(258, 293),
-    Deck(294, 329),
-    Deck(330, 368),
-    Deck(568, 600),
+    None,    
+    Deck(221, 257),     # 1
+    Deck(258, 293),     # 2
+    Deck(294, 329),     # 3
+    Deck(330, 368),     # 4
+    Deck(568, 600),     # 5
+    Deck(601, 640),     # 6
+    None,               # 7
+    Deck(221, 640),     # 8 Vocab Midterm
+    Deck(641, 680),     # 9
+    Deck(724, 757),     # 10
+    Deck(758, 790),     # 11
+    Deck(791, 823),     # 12
+    None,               # 13
+    Deck(824, 856),     # 14
+    Deck(857, 922),     # 15
+    Deck(641, 922),     # Vocab final exam
 ]
 
 filename = 'vocab_data.js'
 with open(filename, encoding='utf-8', mode='w') as fout:
     for deck in decks_to_build:
-        print(f'Processing data for vocab_{deck.min_index}_{deck.max_index}')
-        subset_df = df.query(f"vocab_no >= {deck.min_index} and vocab_no <= {deck.max_index}")
-        fout.write(f'\nlet vocab_{deck.min_index}_{deck.max_index} = [')
-        for term in subset_df.itertuples(index=False, name='Term'):
-            fout.write(f'\n   ["{term.vocab}", "{escape(term.definition)}", "{term.verse}<br>{term.hebrew_example}", "{term.verse}<br>{term.mixed_example}", "🧠{escape(term.mnemonic)}"],')
-        fout.write('\n]')
+        if deck:
+            print(f'Processing data for vocab_{deck.min_index}_{deck.max_index}')
+            subset_df = df.query(f"vocab_no >= {deck.min_index} and vocab_no <= {deck.max_index}")
+            fout.write(f'\nlet vocab_{deck.min_index}_{deck.max_index} = [')
+            for term in subset_df.itertuples(index=False, name='Term'):
+                mnemonic_fmt = '' if term.mnemonic.strip() == '' else f"🧠 {escape(term.mnemonic)}"
+                fout.write(f'\n   ["{term.vocab}", "{escape(term.definition)}", "{term.verse}<br>{term.hebrew_example}", "{term.verse}<br>{term.mixed_example}", "{mnemonic_fmt}"],')
+            fout.write('\n]')
+            fout.write('\n')
+        else: # empty slot 
+            pass
 
     fout.write('\n')
     fout.write('\nlet all_decks = [')
-    fout.write('\n   null,')
     for deck in decks_to_build:
-        fout.write(f'\n   vocab_{deck.min_index}_{deck.max_index},')
+        if deck:
+            fout.write(f'\n   vocab_{deck.min_index}_{deck.max_index},')
+        else:
+            fout.write(f'\n   null,')
     fout.write('\n]')
     fout.write('\n')
 
