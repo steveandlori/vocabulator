@@ -12,7 +12,8 @@ rename_mapping={
     'Type':'word_type',
     'Verse':'verse',
     'Hebrew Example':'hebrew_example',
-    'English Translation with Hebrew Vocab Word':'mixed_example'
+    'English Translation with Hebrew Vocab Word':'mixed_example',
+    'Picture':'picture',
 }
 
 df.rename(columns=rename_mapping, inplace=True)
@@ -50,7 +51,7 @@ with open(filename, encoding='utf-8', mode='w') as fout:
             fout.write(f'\nlet vocab_{deck.min_index}_{deck.max_index} = [')
             for term in subset_df.itertuples(index=False, name='Term'):
                 mnemonic_fmt = '' if term.mnemonic.strip() == '' else f"🧠 {escape(term.mnemonic)}"
-                fout.write(f'\n   ["{term.vocab}", "{escape(term.definition)}", "{term.verse}<br>{term.hebrew_example}", "{term.verse}<br>{term.mixed_example}", "{mnemonic_fmt}"],')
+                fout.write(f'\n   ["{term.vocab}", "{escape(term.definition)}", "{term.verse}<br>{term.hebrew_example}", "{term.verse}<br>{term.mixed_example}", "{mnemonic_fmt}", "{term.picture}"],')
             fout.write('\n]')
             fout.write('\n')
         else: # empty slot 

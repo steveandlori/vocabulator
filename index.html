@@ -102,6 +102,11 @@ i       </style>
                 orig_length = vocab_list.length;
                 vocab = get_word();
                 $("#word").html(vocab[0]);
+                if (vocab[5] != "") {
+                    $("#picture").attr("src", "artwork/flaticon/png/" + vocab[5] + ".png");
+                } else {
+                    $("#picture").attr("src", "");
+                }
                 $("#definition").html(vocab[1]);
                 $("#example").html(vocab[2]); 
                 $("#mixed").html(vocab[3]); 
@@ -126,6 +131,7 @@ i       </style>
 
                 $("#header").text("Hebrew 2 Week " + deck_index);
                 $("#word").css("font-size", "48px");
+                $("#picture_para").css('visibility', 'hidden');
                 $("#definition").css('visibility', 'hidden');
                 $("#example").css('visibility', 'hidden');
                 $("#mixed").css('visibility', 'hidden');
@@ -146,12 +152,14 @@ i       </style>
             function action_click() {
                 caption = $("#action").html();
                 if (caption == "Answer...") {
+                    $("#picture_para").css('visibility', '');
                     $("#definition").css('visibility', '');
                     $("#example").css('visibility', '');
                     $("#mixed").css('visibility', '');
                     $("#mnemonic").css('visibility', '');
                     caption = "Next Word";
                 } else if (caption == "Next Word") {
+                    $("#picture_para").css('visibility', 'hidden');
                     $("#definition").css('visibility', 'hidden');
                     $("#example").css('visibility', 'hidden');
                     $("#mixed").css('visibility', 'hidden');
@@ -162,6 +170,11 @@ i       </style>
 
                     vocab = get_word();
                     $("#word").html(vocab[0]);
+                    if (vocab[5] != "") {
+                        $("#picture").attr("src", "artwork/flaticon/png/" + vocab[5] + ".png");
+                    } else {
+                        $("#picture").attr("src", "");
+                    }
                     $("#definition").html(vocab[1]);
                     $("#example").html(vocab[2]);
                     $("#mixed").html(vocab[3]);
@@ -208,6 +221,7 @@ i       </style>
                     <div id="myProgress"><div id="myBar"></div></div>
                     <div class="ui-body ui-body-a">
                         <div id="word" style="font-family:'SBL_Hebrew'; text-align: center;">Word</div>
+                        <p id="picture_para" style="text-align: center;"><img id="picture"/></p>
                         <p id="definition" style="text-align: center;">Definition</p>
                         <p id="example" style="font-family:'SBL_Hebrew'; font-size: 24px; text-align: center;">Hebrew Example</p>
                         <p id="mixed" style="font-family:'SBL_Hebrew'; font-size: 24px; text-align: center;">Mixed Example</p>
@@ -234,6 +248,9 @@ i       </style>
                 </div>
             </div>
             <div data-role="footer">
+                <div style="font-size: 10px; text-align: center;">
+                    Icons from multiple, talented people courtesy of <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                </div>
             </div><!-- /footer -->
         </div><!-- /page -->
     </body>
