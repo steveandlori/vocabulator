@@ -238,7 +238,7 @@ let vocab_601_640 = [
    ["מְדִינָה", "province", "<br>", "<br>", "", "040-canada"],
 ]
 
-let vocab_221_640 = [
+let vocab_221_680 = [
    ["אָבַל", "to mourn", "Genesis 37:34<br>וַיִּקְרַע יַעֲקֹב שִׂמְלֹתָיו וַיָּשֶׂם שַׂק בְּמָתְנָיו וַיִּתְאַבֵּל עַל־בְּנֹו יָמִים רַבִּים׃", "Genesis 37:34<br>Then Jacob tore his clothes, put on sackcloth and אָבֵל for his son many days.", "🧠 Women wear a veil to mourn the death of a loved one", ""],
    ["אָוָה", "to desire, want, crave (pi./hitp.)", "Psalm 132:13<br>כִּי־בָחַר יְהוָה בְּצִיֹּון אִוָּהּ לְמֹושָׁב לֹו׃", "Psalm 132:13<br>For the LORD has chosen Zion, he has אִוָּהּ it for his dwelling, saying,", "🧠 (This kinda reminds me of &quot;Abba&quot;) God desires, longs for, and wants his children foreva&#x27; (forever)", ""],
    ["אוֹר", "to be bright, shine", "Genesis 44:3<br>הַבֹּקֶר אֹור וְהָאֲנָשִׁים שֻׁלְּחוּ הֵמָּה וַחֲמֹרֵיהֶם׃", "Genesis 44:3<br>As soon as the morning was אוֹר, the men were sent away, they and their donkeys.", "🧠 The sun shines bright rising o&#x27;er the horizon", ""],
@@ -461,10 +461,6 @@ let vocab_221_640 = [
    ["מָגֵן", "shield", "<br>", "<br>", "", "038-shield"],
    ["מִדָּה", "measurement", "<br>", "<br>", "", "039-measuring"],
    ["מְדִינָה", "province", "<br>", "<br>", "", "040-canada"],
-   ["רִמּוֹן", "pomegranate", "<br>", "<br>", "", ""],
-]
-
-let vocab_641_680 = [
    ["מוּסָר", "chastening, correction, discipline", "<br>", "<br>", "", ""],
    ["מִזְמוֹר", "song, psalm, melody", "<br>", "<br>", "", ""],
    ["מִזְרָח", "east, sunrise", "<br>", "<br>", "", ""],
@@ -505,6 +501,53 @@ let vocab_641_680 = [
    ["צוּר", "cliff, rock", "<br>", "<br>", "", ""],
    ["צָרָה", "distress", "<br>", "<br>", "", ""],
    ["קֶ֫בֶר", "tomb, grave", "<br>", "<br>", "", ""],
+   ["רִמּוֹן", "pomegranate", "<br>", "<br>", "", ""],
+]
+
+let vocab_681_723 = [
+   ["קֶ֫דֶם", "east, before, in front of", "<br>", "<br>", "", ""],
+   ["קָדִים", "east, eastward, east wind", "<br>", "<br>", "", ""],
+   ["קָהָל", "assembly, convocation, congregation", "<br>", "<br>", "", ""],
+   ["קָטָן", "unimportant, young, small", "<br>", "<br>", "", ""],
+   ["קְטֹ֫רֶת", "smoke of a sacrifice or incense", "<br>", "<br>", "", ""],
+   ["קִיר", "wall", "<br>", "<br>", "", ""],
+   ["קָנֶה", "reed, stalk", "<br>", "<br>", "", ""],
+   ["קֵץ", "end", "<br>", "<br>", "", ""],
+   ["קָצֶה", "end, border; the whole", "<br>", "<br>", "", ""],
+   ["קָצִיר", "harvest", "<br>", "<br>", "", ""],
+   ["קָרְבָּן", "offering", "<br>", "<br>", "", ""],
+   ["קָרוֹב", "near", "<br>", "<br>", "", ""],
+   ["קֶ֫רֶן", "horn", "<br>", "<br>", "", ""],
+   ["קֶ֫שֶׁת", "bow", "<br>", "<br>", "", ""],
+   ["רֵאשִׁית", "chief, first, beginning", "<br>", "<br>", "", ""],
+   ["רְחוֹב", "open area in town, square, plaza", "<br>", "<br>", "", ""],
+   ["רָחוֹק", "distant, far", "<br>", "<br>", "", ""],
+   ["רִיב", "dispute, case, lawsuit", "<br>", "<br>", "", ""],
+   ["רֵיחַ", "scent, odor", "<br>", "<br>", "", ""],
+   ["רָצוֹן", "desire, favor", "<br>", "<br>", "", ""],
+   ["שְׂמֹאל", "left, left-hand, north", "<br>", "<br>", "", ""],
+   ["שִׂמְחָה", "gladness, joy", "<br>", "<br>", "", ""],
+   ["שָׂעִיר", "satyr, male goat", "<br>", "<br>", "", ""],
+   ["שְׁאוֹל", "Sheol, underworld", "<br>", "<br>", "", ""],
+   ["שְׁאֵרִית", "remnant, rest, residue", "<br>", "<br>", "", ""],
+   ["שְׁבִיעִי", "seventh", "<br>", "<br>", "", ""],
+   ["שִׁבְעִים", "seventy", "<br>", "<br>", "", ""],
+   ["שׁוֹפָר", "horn (to blow)", "<br>", "<br>", "", ""],
+   ["שׁוֹר", "bullock, head of cattle", "<br>", "<br>", "", ""],
+   ["שִׁיר", "song", "<br>", "<br>", "", ""],
+   ["שֻׁלְחָן", "table", "<br>", "<br>", "", ""],
+   ["שְׁלָמִים", "fellowship offerings, peace offerings, sacrifice for alliance", "<br>", "<br>", "", ""],
+   ["שְׁמָמָה", "waste, desolation", "<br>", "<br>", "", ""],
+   ["שֵׁן", "tooth, ivory (f.)", "<br>", "<br>", "", ""],
+   ["שִׁפְחָה", "maid, maid-servant", "<br>", "<br>", "", ""],
+   ["שֶׁ֫קֶל", "shekel", "<br>", "<br>", "", ""],
+   ["שִׁשִּׁים", "sixty", "<br>", "<br>", "", ""],
+   ["תְּהִלָּה", "praise, song of praise", "<br>", "<br>", "", ""],
+   ["תָּמִים", "perfect, complete", "<br>", "<br>", "", ""],
+   ["תִּפְאֶ֫רֶת / תִּפְאָרָה", "glory, beauty", "<br>", "<br>", "", ""],
+   ["תְּפִלָּה", "prayer", "<br>", "<br>", "", ""],
+   ["תְּרוּמָה", "contribution, offering", "<br>", "<br>", "", ""],
+   ["תִּשְׁעָה", "nine", "<br>", "<br>", "", ""],
 ]
 
 let vocab_724_757 = [
@@ -1014,8 +1057,8 @@ let all_decks = [
    vocab_568_600,
    vocab_601_640,
    null,
-   vocab_221_640,
-   vocab_641_680,
+   vocab_221_680,
+   vocab_681_723,
    vocab_724_757,
    vocab_758_790,
    vocab_791_823,

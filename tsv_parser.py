@@ -31,8 +31,8 @@ decks_to_build = [
     Deck(568, 600),     # 5
     Deck(601, 640),     # 6
     None,               # 7
-    Deck(221, 640),     # 8 Vocab Midterm
-    Deck(641, 680),     # 9
+    Deck(221, 680),     # 8 Vocab Midterm
+    Deck(681, 723),     # 9
     Deck(724, 757),     # 10
     Deck(758, 790),     # 11
     Deck(791, 823),     # 12
