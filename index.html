@@ -66,7 +66,8 @@ i       </style>
 
             function load_saved_subset() {
                 subset = [];
-                subset_encoded = localStorage.getItem(`sdt-vocab-review-subset-${deck_index}`);
+                deck_moniker = `sdt-vocab-review-subset-${deck_index}`
+                subset_encoded = localStorage.getItem(deck_moniker);
                 if (subset_encoded) {
                     subset = subset_encoded.split('|');
                     for (vidx in subset) {
@@ -75,7 +76,7 @@ i       </style>
                         $("#" + element_id).prop('checked', true);
                     }
                 }
-                console.log(`subset retrieved = '${subset}'`);
+                console.log(`subset retrieved for ${deck_moniker} = '${subset}'`);
             }
 
             function apply_subset() {
@@ -85,7 +86,13 @@ i       </style>
                 if (subset.length > 0) {
                     for (var i = vocab_list.length - 1; i >= 0; i--) {
                         v = vocab_list[i][0];
-                        if (subset.indexOf(v) == -1) {
+                        break_ix = v.indexOf(' ');
+                        if (break_ix > 0) {
+                            v_code = v.substring(0, break_ix);
+                        } else {
+                            v_code = v
+                        }
+                        if (subset.indexOf(v_code) == -1) {
                             vocab_list.splice(i, 1);
                         }
                     }
@@ -140,9 +147,15 @@ i       </style>
                 div_words = $("#selectable_word_list")
                 for (let vidx in vocab_list) {
                     word = vocab_list[vidx][0];
-                    element_id = 'vocab_' + word;
+                    break_ix = word.indexOf(' ') 
+                    if (break_ix > 0 ) {
+                        code_word = word.substring(0, break_ix);   
+                    } else {
+                        code_word = word;
+                    }
+                    element_id = 'vocab_' + code_word;
                     description = `<span style="font-family:'SBL_Hebrew'; font-size:32px">&nbsp;${word}</span>&nbsp;:&nbsp;${vocab_list[vidx][1]}`;
-                    div_words.append(`<label><input type="checkbox" id="${element_id}" name="vocab" value="${word}">${description}</label>`);
+                    div_words.append(`<label><input type="checkbox" id="${element_id}" name="vocab" value="${code_word}">${description}</label>`);
                 }
 
                 load_saved_subset();
@@ -201,8 +214,9 @@ i       </style>
                 });
                 console.log(`Found ${subset.length} vocab words selected`);
                 subset_encoded = subset.join('|');
-                console.log(`subset_encoded = '${subset_encoded}'`)
-                localStorage.setItem(`sdt-vocab-review-subset-${deck_index}`, subset_encoded);
+                deck_moniker = `sdt-vocab-review-subset-${deck_index}`
+                console.log(`subset_encoded for ${deck_moniker} = '${subset_encoded}'`)
+                localStorage.setItem(deck_moniker, subset_encoded);
 
                 $("#selectable_word_list_section").collapsible( "option", "collapsed", true );
                 apply_subset();
