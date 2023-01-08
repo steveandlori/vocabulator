@@ -20,7 +20,7 @@
             height: 30px;
             background-color: goldenrod;
         }
-i       </style>        
+        </style>        
         <script>
             // TODO: Store last date of review for all sets in the list and show the number of days elapsed since review
             // TODO: add clear-all-selection-and-apply AND invert-selection-and-apply buttons
@@ -31,11 +31,14 @@ i       </style>
             //          active association, sentence recognition, and multiple-choice sentence omission/completion
         </script>
         <script type="text/javascript" charset="UTF-8" src="vocab_data.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="vocab_data_ecclesiastes.js"></script>
         <script>
+            subject = ''
+            segment = ''
             deck_index = 1;
 
-            vocab_list = all_decks[deck_index].slice();  // copy the original
-            orig_length = vocab_list.length;
+            vocab_list = []
+            orig_length = 0
             subset = [];
 
             mode = [
@@ -44,6 +47,10 @@ i       </style>
                 'recognize',
                 'restore'
             ];
+
+            function capitalizeFirst(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
 
             function getRandomInt(min, max) {
                 return Math.floor(Math.random() * (max - min + 1) + min);
@@ -66,7 +73,7 @@ i       </style>
 
             function load_saved_subset() {
                 subset = [];
-                deck_moniker = `sdt-vocab-review-subset-${deck_index}`
+                deck_moniker = `sdt-vocab-review-subset-${subject}-${deck_index}`
                 subset_encoded = localStorage.getItem(deck_moniker);
                 if (subset_encoded) {
                     subset = subset_encoded.split('|');
@@ -127,6 +134,20 @@ i       </style>
             $(document).ready(function() {
 
                 urlParams = new URLSearchParams(window.location.search);
+                subject = urlParams.get('subject');
+                if (subject) {
+                    console.log('Found subject ' + subject)
+                    if (subject == 'ecclesiastes') {
+                        subject = capitalizeFirst(subject)
+                        segment = 'Freq Group'
+                        all_decks = ecclesiastes_decks.slice();
+                    }
+                } else {
+                    subject = 'Hebrew 2'
+                    segment = 'Week'
+                    console.log('No subject found');
+                }
+
                 deck_index = urlParams.get('deck');
                 if (deck_index) {
                     console.log('Requested deck: ' + deck_index);
@@ -136,7 +157,7 @@ i       </style>
                     deck_index = 1;
                 }
 
-                $("#header").text("Hebrew 2 Week " + deck_index);
+                $("#header").text(`${subject} - ${segment} ` + deck_index);
                 $("#word").css("font-size", "48px");
                 $("#picture_para").css('visibility', 'hidden');
                 $("#definition").css('visibility', 'hidden');
@@ -214,7 +235,7 @@ i       </style>
                 });
                 console.log(`Found ${subset.length} vocab words selected`);
                 subset_encoded = subset.join('|');
-                deck_moniker = `sdt-vocab-review-subset-${deck_index}`
+                deck_moniker = `sdt-vocab-review-subset-${subject}-${deck_index}`
                 console.log(`subset_encoded for ${deck_moniker} = '${subset_encoded}'`)
                 localStorage.setItem(deck_moniker, subset_encoded);
 
@@ -227,7 +248,7 @@ i       </style>
         <div data-role="page">
 
             <div data-role="header">
-                <h1 id="header">Hebrew 2 Vocab</h1>
+                <h1 id="header">Hebrew Vocab</h1>
             </div><!-- /header -->
 
             <div role="main" class="ui-content">
