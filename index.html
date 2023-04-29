@@ -32,6 +32,7 @@
         </script>
         <script type="text/javascript" charset="UTF-8" src="vocab_data.js"></script>
         <script type="text/javascript" charset="UTF-8" src="vocab_data_ecclesiastes.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="vocab_data_highfreq.js"></script>
         <script>
             subject = ''
             segment = ''
@@ -138,9 +139,15 @@
                 if (subject) {
                     console.log('Found subject ' + subject)
                     if (subject == 'ecclesiastes') {
-                        subject = 'Qohelet'
-                        segment = 'Group'
+                        subject = 'Qohelet';
+                        segment = 'Group';
                         all_decks = ecclesiastes_decks.slice();
+                    } else if (subject == 'highfreq') {
+                        segment = 'Group';
+                        all_decks = highfreq_decks.slice();
+                    } else if (subject == 'deuteronomy') {
+                        segment = 'Group';
+                        all_decks = deuteronomy_decks.slice();
                     }
                 } else {
                     subject = 'Hebrew 2'
