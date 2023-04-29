@@ -1,5 +1,5 @@
 
-let vocab_1001_1020 = [
+let vocab_2001_2020 = [
    ["אמר", "(Q) to say; (Q Pass, Ni) be said", "<br>", "<br>", "", ""],
    ["אֶל", "to, toward", "<br>", "<br>", "", ""],
    ["אֱלֹהִים", "God, gods", "<br>", "<br>", "", ""],
@@ -22,7 +22,7 @@ let vocab_1001_1020 = [
    ["עשׂה", "(Q) to do, make; (Q Pass) be done, be made, be used; (Ni) be made", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1021_1040 = [
+let vocab_2021_2040 = [
    ["אָב", "father", "<br>", "<br>", "", ""],
    ["אִישׁ", "man", "<br>", "<br>", "", ""],
    ["אֶ֫רֶץ", "land, earth", "<br>", "<br>", "", ""],
@@ -45,7 +45,7 @@ let vocab_1021_1040 = [
    ["שׁמע", "(Q) to hear; (Ni) be heard; (Hi) cause to hear, proclaim", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1041_1060 = [
+let vocab_2041_2060 = [
    ["אֶחָד", "one", "<br>", "<br>", "", ""],
    ["אִם", "if", "<br>", "<br>", "", ""],
    ["אֲנִי", "I", "<br>", "<br>", "", ""],
@@ -68,7 +68,7 @@ let vocab_1041_1060 = [
    ["שָׁנָה", "year", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1061_1080 = [
+let vocab_2061_2080 = [
    ["אָדוֹן", "lord, master", "<br>", "<br>", "", ""],
    ["אַחַר", "after", "<br>", "<br>", "", ""],
    ["אַ֫יִן", "there is not, there is nothing", "<br>", "<br>", "", ""],
@@ -91,7 +91,7 @@ let vocab_1061_1080 = [
    ["שְׁנַ֫יִם", "two", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1081_1100 = [
+let vocab_2081_2100 = [
    ["אָדָם", "man, person, humanity", "<br>", "<br>", "", ""],
    ["אָח", "brother", "<br>", "<br>", "", ""],
    ["בַּת", "daughter", "<br>", "<br>", "", ""],
@@ -114,7 +114,7 @@ let vocab_1081_1100 = [
    ["תַּ֫חַת", "under, instead of", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1101_1120 = [
+let vocab_2101_2120 = [
    ["אֶ֫לֶף", "thousand", "<br>", "<br>", "", ""],
    ["אַרְבַּע", "four", "<br>", "<br>", "", ""],
    ["הִיא", "she, it", "<br>", "<br>", "", ""],
@@ -137,7 +137,7 @@ let vocab_1101_1120 = [
    ["שׁמר", "(Q) to keep, watch, preserve; (Ni) be guarded, be careful, be on guard", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1121_1140 = [
+let vocab_2121_2140 = [
    ["אֵשׁ", "fire", "<br>", "<br>", "", ""],
    ["בֵּין", "between", "<br>", "<br>", "", ""],
    ["בנה", "(Q) to build; (Ni) be built", "<br>", "<br>", "", ""],
@@ -160,7 +160,7 @@ let vocab_1121_1140 = [
    ["תָּ֫וֶךְ", "midst", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1141_1160 = [
+let vocab_2141_2160 = [
    ["אֹ֫הֶל", "tent", "<br>", "<br>", "", ""],
    ["אַהֲרֹן", "Aaron", "<br>", "<br>", "", ""],
    ["אוֹ", "or", "<br>", "<br>", "", ""],
@@ -183,7 +183,7 @@ let vocab_1141_1160 = [
    ["שָׂדֶה", "field", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1161_1180 = [
+let vocab_2161_2180 = [
    ["אֹיֵב", "enemy", "<br>", "<br>", "", ""],
    ["אַתֶּם", "you (masc. pl.)", "<br>", "<br>", "", ""],
    ["בְּרִית", "covenant", "<br>", "<br>", "", ""],
@@ -206,7 +206,7 @@ let vocab_1161_1180 = [
    ["שְׁלֹמֹה", "Solomon", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1181_1200 = [
+let vocab_2181_2200 = [
    ["אֶ֫בֶן", "stone", "<br>", "<br>", "", ""],
    ["אַמָּה", "cubit (unit of measure)", "<br>", "<br>", "", ""],
    ["אַף", "nose, anger", "<br>", "<br>", "", ""],
@@ -229,7 +229,7 @@ let vocab_1181_1200 = [
    ["שֵׁשׁ", "six", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1201_1220 = [
+let vocab_2201_2220 = [
    ["אֲדָמָה", "ground, earth, land", "<br>", "<br>", "", ""],
    ["אהב", "(Q) to love; (Pi) love, be a lover", "<br>", "<br>", "", ""],
    ["אֵל", "God", "<br>", "<br>", "", ""],
@@ -252,7 +252,7 @@ let vocab_1201_1220 = [
    ["תּוֹרָה", "law, instruction", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1221_1240 = [
+let vocab_2221_2240 = [
    ["אסף", "(Q) to gather; (Ni) be gathered, gather together", "<br>", "<br>", "", ""],
    ["אֲרוֹן", "ark", "<br>", "<br>", "", ""],
    ["בֶּ֫גֶד", "garment", "<br>", "<br>", "", ""],
@@ -275,7 +275,7 @@ let vocab_1221_1240 = [
    ["שׁתה", "(Q) to drink", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1241_1260 = [
+let vocab_2241_2260 = [
    ["אבד", "(Q) to become lost, perish; (Pi, Hi) destroy", "<br>", "<br>", "", ""],
    ["אֹ֫זֶן", "ear", "<br>", "<br>", "", ""],
    ["אֶפְרַ֫יִם", "Ephraim", "<br>", "<br>", "", ""],
@@ -298,7 +298,7 @@ let vocab_1241_1260 = [
    ["שֶׁ֫מֶן", "oil, fat", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1261_1280 = [
+let vocab_2261_2280 = [
    ["אַבְרָהָם", "Abraham", "<br>", "<br>", "", ""],
    ["אַחֵר", "other, another", "<br>", "<br>", "", ""],
    ["בחר", "(Q) to choose; (Q Pass) be chosen", "<br>", "<br>", "", ""],
@@ -321,7 +321,7 @@ let vocab_1261_1280 = [
    ["שׁאל", "(Q) to ask, consult", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1281_1300 = [
+let vocab_2281_2300 = [
    ["אַ֫יִל", "ram, ruler", "<br>", "<br>", "", ""],
    ["אַךְ", "only, nevertheless", "<br>", "<br>", "", ""],
    ["אַשּׁוּר", "Assyria", "<br>", "<br>", "", ""],
@@ -344,7 +344,7 @@ let vocab_1281_1300 = [
    ["שֵׁנִי", "second", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1301_1320 = [
+let vocab_2301_2320 = [
    ["אָז", "then", "<br>", "<br>", "", ""],
    ["הלל", "(Pi) to praise; (Pu) be praised; (Hith) boast, glory, be praised", "<br>", "<br>", "", ""],
    ["חָכְמָה", "wisdom", "<br>", "<br>", "", ""],
@@ -367,7 +367,7 @@ let vocab_1301_1320 = [
    ["שְׁמֹנֶה", "eight", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1321_1340 = [
+let vocab_2321_2340 = [
    ["אַף", "also, indeed", "<br>", "<br>", "", ""],
    ["אֲרָם", "Aram", "<br>", "<br>", "", ""],
    ["גִּלְעָד", "Gilead", "<br>", "<br>", "", ""],
@@ -390,7 +390,7 @@ let vocab_1321_1340 = [
    ["קרא", "(Q) to call, summon, invite; (Q Pass) be invited; (Ni) be called, be summoned", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1341_1360 = [
+let vocab_2341_2360 = [
    ["אוֹר", "light", "<br>", "<br>", "", ""],
    ["אֱמֶת", "truth, faithfulness", "<br>", "<br>", "", ""],
    ["בושׁ", "(Q) to be ashamed; (Hi) put to shame, be put to shame, act shamefully", "<br>", "<br>", "", ""],
@@ -413,7 +413,7 @@ let vocab_1341_1360 = [
    ["שׁלך", "(Hi) to throw; (Ho) be thrown", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1361_1380 = [
+let vocab_2361_2380 = [
    ["אָחוֹת", "sister", "<br>", "<br>", "", ""],
    ["אֲנַחְנוּ", "we", "<br>", "<br>", "", ""],
    ["בְּכֹר", "firstborn", "<br>", "<br>", "", ""],
@@ -436,7 +436,7 @@ let vocab_1361_1380 = [
    ["תּוֹעֵבָה", "abomination", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1381_1400 = [
+let vocab_2381_2400 = [
    ["אַבְשָׁלוֹם", "Absalom", "<br>", "<br>", "", ""],
    ["בכה", "(Q) to weep", "<br>", "<br>", "", ""],
    ["בִּלְתִּי", "not, in order not to, except", "<br>", "<br>", "", ""],
@@ -459,7 +459,7 @@ let vocab_1381_1400 = [
    ["שֶׁ֫קֶר", "lie, deception", "<br>", "<br>", "", ""],
 ]
 
-let vocab_1401_1418 = [
+let vocab_2401_2418 = [
    ["בָּמָה", "high place", "<br>", "<br>", "", ""],
    ["בַּ֫עַד", "behind, through", "<br>", "<br>", "", ""],
    ["גאל", "(Q) to redeem, avenge", "<br>", "<br>", "", ""],
@@ -483,25 +483,25 @@ let vocab_1401_1418 = [
 
 let highfreq_decks = [
    null,
-   vocab_1001_1020,
-   vocab_1021_1040,
-   vocab_1041_1060,
-   vocab_1061_1080,
-   vocab_1081_1100,
-   vocab_1101_1120,
-   vocab_1121_1140,
-   vocab_1141_1160,
-   vocab_1161_1180,
-   vocab_1181_1200,
-   vocab_1201_1220,
-   vocab_1221_1240,
-   vocab_1241_1260,
-   vocab_1261_1280,
-   vocab_1281_1300,
-   vocab_1301_1320,
-   vocab_1321_1340,
-   vocab_1341_1360,
-   vocab_1361_1380,
-   vocab_1381_1400,
-   vocab_1401_1418,
+   vocab_2001_2020,
+   vocab_2021_2040,
+   vocab_2041_2060,
+   vocab_2061_2080,
+   vocab_2081_2100,
+   vocab_2101_2120,
+   vocab_2121_2140,
+   vocab_2141_2160,
+   vocab_2161_2180,
+   vocab_2181_2200,
+   vocab_2201_2220,
+   vocab_2221_2240,
+   vocab_2241_2260,
+   vocab_2261_2280,
+   vocab_2281_2300,
+   vocab_2301_2320,
+   vocab_2321_2340,
+   vocab_2341_2360,
+   vocab_2361_2380,
+   vocab_2381_2400,
+   vocab_2401_2418,
 ]
